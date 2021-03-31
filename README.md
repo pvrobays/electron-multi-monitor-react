@@ -22,11 +22,11 @@ You can always check out the code from the demo, found in the `example` folder.
 
 ### 1. Installation & Import
 Easiest way to install it is via [npm](https://www.npmjs.com/get-npm):
-```
+```bash
 npm install electron-multi-monitor electron-multi-monitor-react
 ```
 Next you'll be able to import the MultiMonitor object inside your [Electron](https://electronjs.org/) app:
-```
+```ts
 import { MultiMonitor } from "electron-multi-monitor";
 ```
 
@@ -36,15 +36,15 @@ P.s. If you're new to electron, [Electron Forge](https://www.electronforge.io/) 
 There are 2 ways of creating  MultiMonitor instance:
 
 1. Use the default instance
-```
+```ts
 const multiMonitor = MultiMonitor.instance;
 ```
 2. or, Create your own via the MultiMonitorFactory
-```
+```ts
 const multiMonitor = new MultiMonitorFactory().create();
 ```
 The `multiMonitor` object can be used to adapt, move, interact with the opened windows within your Main process:
-```
+```ts
 interface IMultiMonitor {
     readonly monitors: BrowserWindow[];
     openUrl(url: string, numberOfMonitors: number): Promise<void>;
@@ -54,7 +54,7 @@ interface IMultiMonitor {
 
 ### 3. Launch multiple monitors
 Now you can open your multi-monitor page via the MultiMonitor instance:
-```
+```ts
 multiMonitor.openUrl(url, numberOfWindowsToOpen)
 .then(() => {
     console.log("Monitor windows are opened have your URL loaded!");
@@ -65,7 +65,7 @@ This will open your url inside the number of windows you've defined.
 
 ### 4. Adapt your web application
 Inside your web application where you start rendering your initial React component:
-```
+```tsx
 import ReactDOM from "react-dom";
 import { isThisTheMainWindow } from "electron-multi-monitor-react";
 
@@ -80,14 +80,14 @@ if (!isThisTheMainWindow()) {
 
 ### 5. Create your own Monitor component
 Render the `<Monitors>` React component in your app. This exposes a monitorRenderer property which accepts a function that returns your own monitor component.
-```
+```tsx
 <Monitors monitorRenderer={
     (props) => <MyMonitorComponent {...props} /* someOtherProp={"abc"} */ /> 
 } />
 ```
 
 Create your `<MyMonitorComponent>`, which accepts the `MonitorProps`:
-```
+```tsx
 export interface IMyMonitorComponentProps {
     monitorRank: number;
     numberOfMonitors: number;
