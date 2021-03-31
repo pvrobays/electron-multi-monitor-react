@@ -4,7 +4,7 @@ import { PictureComponent } from "./picture/PictureComponent";
 import { PicturesListComponent } from "./pictures-list/PicturesListComponent";
 
 export interface IMonitorComponentProps {
-    rank: number;
+    monitorRank: number;
     numberOfMonitors: number;
     currentWindow: Window;
 }
@@ -14,24 +14,24 @@ export class MonitorComponent extends React.Component<IMonitorComponentProps> {
     constructor(props: IMonitorComponentProps) {
         super(props);
         
-        const { currentWindow, rank, numberOfMonitors } = props;
-        currentWindow.document.title = `Picture app ${rank === 1 ? "list" : `- window #${rank}/${numberOfMonitors}`}`;
+        const { currentWindow, monitorRank, numberOfMonitors } = props;
+        currentWindow.document.title = `Picture app ${monitorRank === 1 ? "list" : `- window #${monitorRank}/${numberOfMonitors}`}`;
     }
     
     render() {
-        const { rank, numberOfMonitors } = this.props;
+        const { monitorRank, numberOfMonitors } = this.props;
 
         let monitorComponent: JSX.Element;
-        switch (rank) {
+        switch (monitorRank) {
             // Choose which monitor should show which component...
             case 1:
                 monitorComponent = <PicturesListComponent/>;
                 break;
             default:
-                monitorComponent = <PictureComponent type={ rank - 1 }/>;
+                monitorComponent = <PictureComponent type={ monitorRank - 1 }/>;
         }
 
-        return <LayoutComponent rank={ rank } numberOfMonitors={ numberOfMonitors }>
+        return <LayoutComponent rank={ monitorRank } numberOfMonitors={ numberOfMonitors }>
             { monitorComponent }
         </LayoutComponent>;
     }

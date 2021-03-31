@@ -1,11 +1,12 @@
 ﻿import { configure } from "mobx";
 import * as React from "react";
 import ReactDOM from "react-dom";
+import { isThisTheMainWindow } from "../../dist";
 import { AppComponent } from "./AppComponent";
 import { AppFactory } from "./AppFactory";
 
 (() => {
-    if (!window.electronMultiMonitor) {
+    if (!isThisTheMainWindow()) {
         console.warn("We're not the Main window, so we won't execute any code to avoid errors.");
         return; // Only the main window should execute this code
     }
