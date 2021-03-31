@@ -7,6 +7,7 @@
     "build": "rimraf ./dist && tsc",
     "build-example-app": "cd example/app && webpack-cli --config=webpack.config.js --mode=development",
     "example": "npm run build && npm run build-example-app && electron example/index.js",
+    "prepublishOnly": "npm run test && npm run build && npm run build-example-app",
     "test": "jest"
   },
   "repository": {
@@ -29,6 +30,9 @@
     "url": "https://github.com/pvrobays/electron-multi-monitor-react/issues"
   },
   "homepage": "https://github.com/pvrobays/electron-multi-monitor-react#readme",
+  "files": [
+    "dist/*"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
